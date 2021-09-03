@@ -26,7 +26,7 @@ namespace RCP_reader
 
         public void GetWorkPath()
         {
-            Console.WriteLine("Please provide path to RCP SCV files:");
+            Console.WriteLine("CVS reader for RCP log files.\r\n\r\nPlease provide path to RCP SCV files:");
             string workingPath = Console.ReadLine();
 
             try
@@ -35,6 +35,7 @@ namespace RCP_reader
                 {
                     Console.WriteLine("Provided path contains no CSV files. Press any key to quit.");
                     Console.ReadKey();
+                    return;
                 }
                 else
                 {
@@ -45,6 +46,7 @@ namespace RCP_reader
             {
                 Console.WriteLine($"{ error.Message} Press any key to quit.");
                 Console.ReadKey();
+                return;
             }
 
             ProcessFiles();
