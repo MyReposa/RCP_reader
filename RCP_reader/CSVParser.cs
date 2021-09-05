@@ -15,6 +15,7 @@ namespace RCP_reader
         {
             Console.WriteLine("Parsing started...");
             string[] allLines = File.ReadAllLines(file);
+            int errorsInFileCount = 0;
 
             foreach (string line in allLines)
             {
@@ -26,12 +27,15 @@ namespace RCP_reader
                 catch (Exception error)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine($"Something is wrong with entry \"{line}\" in file \"{file}\". {error.Message} This line will be ignored.\r\n");
+                    Console.Write($"ERROR: ");
                     Console.ForegroundColor = ConsoleColor.Gray;
+                    Console.WriteLine($"Entry \"{line}\" is invalid. {error.Message} This line will be ignored.");
+                    errorsInFileCount++;
                 }
 
             }
-            Console.WriteLine("Parsing of this file completed.\r\n");
+            Console.WriteLine("Parsing of this file completed.\r\n" +
+                             $"Number of errors: {errorsInFileCount}\r\n");
         }
 
         protected virtual DzienPracy ParseSingleLine(string[] csvElements)
@@ -41,7 +45,6 @@ namespace RCP_reader
 
         protected virtual void GetDailyData(DzienPracy entry)
         {
-
         }
     }
 }
